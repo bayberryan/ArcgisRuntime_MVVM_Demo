@@ -1,0 +1,31 @@
+﻿<Application x:Class="MvvmApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
+             xmlns:local="clr-namespace:MvvmApp"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <esri:Map x:Key="IncidentMap">
+            <esri:Map.InitialViewpoint>
+                <esri:ViewpointExtent XMin="-1631122.453"  
+                            YMin="4253523.549" 
+                            XMax="4163264.136"  
+                            YMax="8976345.495" />
+            </esri:Map.InitialViewpoint>
+            <esri:ArcGISTiledMapServiceLayer ID="BaseMap" 
+                ServiceUri="http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"/>
+            <esri:FeatureLayer ID="Incidents">
+                <esri:ServiceFeatureTable 
+                ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/SF311/FeatureServer/0"/>
+                <esri:FeatureLayer.Renderer>
+                    <esri:SimpleRenderer>
+                        <esri:SimpleMarkerSymbol Color="Red" Size="16" Style="Triangle"/>
+                    </esri:SimpleRenderer>
+                </esri:FeatureLayer.Renderer>
+            </esri:FeatureLayer>
+            <esri:GraphicsLayer ID="PointGraphics"/>
+        </esri:Map>
+        
+        <local:MapViewModel x:Key="MapVM"/>
+    </Application.Resources>
+</Application>
